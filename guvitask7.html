@@ -47,18 +47,20 @@
           console.log(population);}
 
           //Print the country which use US Dollars as currency.
-                function handleData() {
-          let  data = JSON.parse(this.response);
-           var cur=[];
-
-           for(i=0;i<data.length;i++){
-            if(data[i].currencies)
-            {
-                console.log("name:",data[i].name,"==>",data[i].currencies)
-            }
-            
-        }
-    }
+               let country=data.filter((e)=>{
+                   for(let i in e.currencies)
+                   { 
+                       if(e.currencies[i].name=="USD")
+                       {
+                           return true;
+                       }
+                       
+                       else {
+                              return false;
+                             }
+                    }
+                 })
+               console.log(country);
              const request = new XMLHttpRequest();
               request.addEventListener('load',handleData)
              request.open("GET","https://restcountries.com/v3.1/all")
